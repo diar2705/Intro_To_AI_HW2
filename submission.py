@@ -14,9 +14,11 @@ def smart_heuristic(env: WarehouseEnv, robot_id: int):
 
     # if the robot is already holding a package, then return credit + reward - cost
     if robot.package is not None:
-        reward = manhattan_distance(robot.package.position, robot.package.destination)
+        reward = 2 * manhattan_distance(
+            robot.package.position, robot.package.destination
+        )
         cost = manhattan_distance(robot.position, robot.package.destination)
-        return robot.credit + reward - cost
+        return 1000 * robot.credit + reward - cost
 
     # if the robot isn't holding a package, then take the closest avalibale package to it,
     avail = [p for p in env.packages if p.on_board]
@@ -24,7 +26,7 @@ def smart_heuristic(env: WarehouseEnv, robot_id: int):
 
     # and then return credit - position to the closest package to the robot
     cost = manhattan_distance(robot.position, p.position)
-    return robot.credit - cost
+    return 1000 * robot.credit - cost
 
 
 class AgentGreedyImproved(AgentGreedy):
@@ -191,8 +193,10 @@ class AgentExpectimax(RBAgent):
 
             expctance = 0
             for child, p in zip(children, probability):
-                expctance += p * self.expectimax(child, robot_id, depth - 1, (turn + 1) % 2)
-            
+                expctance += p * self.expectimax(
+                    child, robot_id, depth - 1, (turn + 1) % 2
+                )
+
             return expctance
 
 

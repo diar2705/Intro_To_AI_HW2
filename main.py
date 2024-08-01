@@ -6,8 +6,10 @@ import argparse
 import submission
 import Agent
 
-#minimax minimax -t 1 -s 1234 -c 200 --console_print --screen_print
-#alphabeta alphabeta -t 1 -s 1234 -c 200 --console_print --screen_print
+# 1) python main.py greedyImproved greedyImproved -t 1 -s 1234 -c 200 --console_print --tournament
+# 2) python main.py minimax greedyImproved -t 1 -s 1234 -c 200 --console_print --tournament
+# 3) python main.py alphabeta greedyImproved -t 1 -s 1234 -c 200 --console_print --tournament
+# 4) python main.py expectimax greedyImproved -t 1 -s 1234 -c 200 --console_print --tournament
 
 
 def run_agents():
